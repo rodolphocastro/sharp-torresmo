@@ -11,13 +11,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{68AF0089-AA4E-4D91-B580-6D5BC9B88BF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3479A7A3-86E9-406B-97F3-3A3E88A96865}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torresmo.UnitTests", "tests\Torresmo.UnitTests\Torresmo.UnitTests.csproj", "{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torresmo.Api", "src\Torresmo.Api\Torresmo.Api.csproj", "{53D6096B-6420-4356-83D7-C8D7216D7345}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D6096B-6420-4356-83D7-C8D7216D7345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D6096B-6420-4356-83D7-C8D7216D7345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D6096B-6420-4356-83D7-C8D7216D7345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D6096B-6420-4356-83D7-C8D7216D7345}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BB2B80F3-3C75-47F2-A4FD-F48F277ADB11} = {3479A7A3-86E9-406B-97F3-3A3E88A96865}
+		{53D6096B-6420-4356-83D7-C8D7216D7345} = {68AF0089-AA4E-4D91-B580-6D5BC9B88BF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E87BEC96-EC6C-482B-B7A2-DB6BE21137D1}
