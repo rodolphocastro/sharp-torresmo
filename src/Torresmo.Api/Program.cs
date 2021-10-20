@@ -39,3 +39,8 @@ internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+public partial class Program
+{
+    // Expose the Program class for use with WebApplicationFactory<T>
+}
