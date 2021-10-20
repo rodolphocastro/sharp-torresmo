@@ -12,7 +12,13 @@ COPY . .
 WORKDIR "/src/src/Torresmo.Api"
 RUN dotnet build "Torresmo.Api.csproj" -c Release -o /app/build
 
-FROM build AS publish
+FROM build AS test
+WORKDIR "/src/tests/Torresmo.UnitTests"
+RUN dotnet restore
+RUN dotnet test
+
+FROM test AS publish
+WORKDIR "/src/src/Torresmo.Api"
 RUN dotnet publish "Torresmo.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
