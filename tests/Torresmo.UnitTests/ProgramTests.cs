@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
+using MonoTorrent.Client;
+
 using Swashbuckle.AspNetCore.Swagger;
 
 using System;
@@ -40,6 +42,20 @@ namespace Torresmo.UnitTests
             act
                 .Should()
                 .NotThrow("The DI container should always have the Swagger Generator, else there would be no OpenApi docs");
+        }
+
+        [Fact]
+        public void ServiceProvider_ResolvesClientEngine()
+        {
+            // Arrange
+
+            // Act
+            Action act = () => ServiceProvider.GetRequiredService<ClientEngine>();
+
+            // Assert
+            act
+                .Should()
+                .NotThrow("The MonoTorrent.ClientEngine is the backing engine behind the API");
         }
     }
 }
