@@ -1,0 +1,48 @@
+name: Build and Test
+
+on:
+  push:
+    branches: ["**"]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # note: In theory this isn't required since build-push-action already checks out the repository
+      - name: Code Checkout
+        uses: actions/checkout@v2
+
+      # note: Not required, but should help us in the future
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # note: "Automagically" creates all the metadata we need when pushing an image to a registry
+      - name: Create docker metadata
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      # logs into a Docker registry, in this case GitHub's
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: "src/Torresmo.Api/Dockerfile"
+          push: ${{ github.ref == 'refs/heads/master' }} # Only push on master
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha # Attempt to hydrate from GitHub Actions' cache
+          cache-to: type=gha,mode=max # Attempt to save state to GitHub Action's cache

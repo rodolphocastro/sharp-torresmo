@@ -1,0 +1,45 @@
+using FluentAssertions;
+
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+
+using Swashbuckle.AspNetCore.Swagger;
+
+using System;
+
+using Xunit;
+
+namespace Torresmo.UnitTests
+{
+    public class ProgramTests : WebApplicationFactory<Program>
+    {
+        private IServiceProvider ServiceProvider => Server.Services;
+
+        [Fact]
+        public void ServiceProvider_ResolvesApiExplorer()
+        {
+            // Arrange
+
+            // Act
+            Action act = () => ServiceProvider.GetRequiredService<IApiDescriptionGroupCollectionProvider>();
+
+            // Assert
+            act.Should().NotThrow("the DI container should always have the Api Explorer services");
+        }
+
+        [Fact]
+        public void ServiceProvider_ResolvesSwashbuckle()
+        {
+            // Arrange
+
+            // Act
+            Action act = () => ServiceProvider.GetRequiredService<ISwaggerProvider>();
+
+            // Assert
+            act
+                .Should()
+                .NotThrow("The DI container should always have the Swagger Generator, else there would be no OpenApi docs");
+        }
+    }
+}
